@@ -1,0 +1,881 @@
+{
+    "queryAdmin": {
+        "name": "queryAdmin",
+        "requestUrl": "/api/yolar/v3/admins",
+        "response_obj": "message AdminListDTO { \n    optional Result result = 1;\n    repeated Admin admin = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "map",
+                "type": "Map<String, String>",
+                "field": ""
+            }
+        ],
+        "desc": ""
+    },
+    "saveAdmin": {
+        "name": "saveAdmin",
+        "requestUrl": "/api/yolar/v3/admins",
+        "response_obj": "message AdminDTO { \n    optional Result result = 1;\n    optional Admin admin = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.AdminCreateOption",
+                "field": "message AdminCreateOption { \n    optional string name = 1;\n    optional string phone = 2;\n    optional string remark = 3;\n    optional string avatarUrl = 6;\n    optional int64 status = 7;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "getAdminById": {
+        "name": "getAdminById",
+        "requestUrl": "/api/yolar/v3/admins/{adminId}",
+        "response_obj": "message AdminDTO { \n    optional Result result = 1;\n    optional Admin admin = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "adminId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": ""
+    },
+    "getAdminByPhone": {
+        "name": "getAdminByPhone",
+        "requestUrl": "/api/yolar/v3/admins/phone/{phone}",
+        "response_obj": "message AdminDTO { \n    optional Result result = 1;\n    optional Admin admin = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "phone",
+                "type": "String",
+                "field": ""
+            }
+        ],
+        "desc": ""
+    },
+    "resetToken": {
+        "name": "resetToken",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}/reset-token",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u91cd\u7f6e\u62a4\u58eb\u7684tokenparamnurseIdreturn/"
+    },
+    "updateAdmin": {
+        "name": "updateAdmin",
+        "requestUrl": "/api/yolar/v3/admins/{adminId}",
+        "response_obj": "message AdminDTO { \n    optional Result result = 1;\n    optional Admin admin = 2;\n}",
+        "method": "PATCH",
+        "parameters": [
+            {
+                "name": "adminId",
+                "type": "Long",
+                "field": ""
+            },
+            {
+                "name": "option",
+                "type": "Yolar.AdminUpdateOption",
+                "field": "message AdminUpdateOption { \n    optional int64 adminId = 1;\n    optional string name = 2;\n    optional string phone = 3;\n    optional string remark = 4;\n    optional int64 type = 5;\n    optional int64 status = 6;\n    optional string password = 7;\n    optional string avatarUrl = 8;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "sendPhoneCaptcha": {
+        "name": "sendPhoneCaptcha",
+        "requestUrl": "/api/yolar/v3/captcha/phone",
+        "response_obj": "message SimpleResponse { \n    optional Result result = 1;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.SendPhoneCaptchaOption",
+                "field": "message SendPhoneCaptchaOption { \n    optional string phone = 1;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "validatePhoneCaptcha": {
+        "name": "validatePhoneCaptcha",
+        "requestUrl": "/api/yolar/v3/captcha/phone/validate",
+        "response_obj": "message ValidateDTO { \n    optional Result result = 1;\n    optional bool validate = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.PhoneCaptchaOption",
+                "field": "message PhoneCaptchaOption { \n    optional string phone = 1;\n    optional string captcha = 2;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "heartbeat": {
+        "name": "heartbeat",
+        "requestUrl": "/guard/heartbeat",
+        "response_obj": "message SimpleResponse { \n    optional Result result = 1;\n}",
+        "method": "GET",
+        "parameters": [],
+        "desc": ""
+    },
+    "loginByPhoneAndPassword": {
+        "name": "loginByPhoneAndPassword",
+        "requestUrl": "/api/yolar/v3/login/phone-password",
+        "response_obj": "message SimpleLoginDTO { \n    optional Data data = 1;\n    message Data {\n        optional string token = 1;\n        optional int64 id = 2;\n        optional LoginRole loginRole = 3;\n        optional string redirectUrl = 4;\n    }\n    optional Result result = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.PhonePasswordLoginOption",
+                "field": "message PhonePasswordLoginOption { \n    optional string phone = 1;\n    optional string password = 2;\n    optional LoginRole loginRole = 3;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "loginByPhoneAndCaptcha": {
+        "name": "loginByPhoneAndCaptcha",
+        "requestUrl": "/api/yolar/v3/login/phone-captcha",
+        "response_obj": "message SimpleLoginDTO { \n    optional Data data = 1;\n    message Data {\n        optional string token = 1;\n        optional int64 id = 2;\n        optional LoginRole loginRole = 3;\n        optional string redirectUrl = 4;\n    }\n    optional Result result = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.PhoneCaptchaLoginOption",
+                "field": "message PhoneCaptchaLoginOption { \n    optional string phone = 1;\n    optional string captcha = 2;\n    optional LoginRole loginRole = 3;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "resetPasswordByPhoneCaptcha": {
+        "name": "resetPasswordByPhoneCaptcha",
+        "requestUrl": "/api/yolar/v3/login/reset-password",
+        "response_obj": "message SimpleResponse { \n    optional Result result = 1;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.SimpleLoginOption",
+                "field": "message SimpleLoginOption { \n    optional string phone = 1;\n    optional string password = 2;\n    optional string captcha = 3;\n    optional LoginRole loginRole = 4;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "loginByWeChat": {
+        "name": "loginByWeChat",
+        "requestUrl": "/api/yolar/v3/login/wx/{code}",
+        "response_obj": "message SimpleLoginDTO { \n    optional Data data = 1;\n    message Data {\n        optional string token = 1;\n        optional int64 id = 2;\n        optional LoginRole loginRole = 3;\n        optional string redirectUrl = 4;\n    }\n    optional Result result = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "code",
+                "type": "String",
+                "field": ""
+            },
+            {
+                "name": "option",
+                "type": "Yolar.SimpleLoginOption",
+                "field": "message SimpleLoginOption { \n    optional string phone = 1;\n    optional string password = 2;\n    optional string captcha = 3;\n    optional LoginRole loginRole = 4;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "logOut": {
+        "name": "logOut",
+        "requestUrl": "/api/yolar/v3/logout",
+        "response_obj": "message SimpleResponse { \n    optional Result result = 1;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.SimpleLogOutOption",
+                "field": "message SimpleLogOutOption { \n    optional int64 id = 1;\n    optional LoginRole loginRole = 2;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "createNurse": {
+        "name": "createNurse",
+        "requestUrl": "/api/yolar/v3/nurses",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.NurseCreateOption",
+                "field": "message NurseCreateOption { \n    optional int64 departmentId = 1;\n    optional string name = 2;\n    optional string idCard = 3;\n    optional string certs = 4;\n    optional string photos = 5;\n    optional string title = 6;\n    optional string phone = 7;\n    optional string avatarUrl = 8;\n    optional int64 birthday = 9;\n    optional int64 gender = 10;\n    optional int64 status = 11;\n}"
+            }
+        ],
+        "desc": "/\u521b\u5efa\u62a4\u58ebparamoptionreturn/"
+    },
+    "queryNurse": {
+        "name": "queryNurse",
+        "requestUrl": "/api/yolar/v3/nurses",
+        "response_obj": "message NurseListDTO { \n    optional Result result = 1;\n    repeated Nurse nurse = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "map",
+                "type": "Map<String, String>",
+                "field": ""
+            }
+        ],
+        "desc": "/\u62a4\u58eb\u67e5\u8be2\u63a5\u53e3parammap\u53c2\u6570\u8bf7\u53c2\u8003com.youhujia.halo.yolar.YolarNurseQueryEnumreturn/"
+    },
+    "getNurseById": {
+        "name": "getNurseById",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u901a\u8fc7nurseId\u67e5\u627e\u62a4\u58ebparamnurseIdreturn/"
+    },
+    "getNurseByIds": {
+        "name": "getNurseByIds",
+        "requestUrl": "/api/yolar/v3/nurses/ids",
+        "response_obj": "message NurseListDTO { \n    optional Result result = 1;\n    repeated Nurse nurse = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "nurseIds",
+                "type": "String",
+                "field": ""
+            }
+        ],
+        "desc": "/\u901a\u8fc7nurseIds\u67e5\u627e\u62a4\u58ebnurseIds=1,2,3paramnurseIdsreturn/"
+    },
+    "getNurseByPhone": {
+        "name": "getNurseByPhone",
+        "requestUrl": "/api/yolar/v3/nurses/phone/{phone}",
+        "response_obj": "message NurseListDTO { \n    optional Result result = 1;\n    repeated Nurse nurse = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "phone",
+                "type": "String",
+                "field": ""
+            }
+        ],
+        "desc": "/\u901a\u8fc7phone\u67e5\u627e\u62a4\u58ebparamphonereturn/"
+    },
+    "updateNurse": {
+        "name": "updateNurse",
+        "requestUrl": "/api/yolar/v3/nurses",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "PATCH",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.NurseUpdateOption",
+                "field": "message NurseUpdateOption { \n    optional int64 nurseId = 1;\n    optional string name = 2;\n    optional string idCard = 3;\n    optional string certs = 4;\n    optional string photos = 5;\n    optional string title = 6;\n    optional string phone = 7;\n    optional string avatarUrl = 8;\n    optional int64 birthday = 9;\n    optional int64 gender = 10;\n}"
+            }
+        ],
+        "desc": "/\u66f4\u65b0\u62a4\u58eb\u4fe1\u606fparamoptionreturn/"
+    },
+    "getNursesByName": {
+        "name": "getNursesByName",
+        "requestUrl": "/api/yolar/v3/nurses/name/{name}",
+        "response_obj": "message NurseListDTO { \n    optional Result result = 1;\n    repeated Nurse nurse = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "String",
+                "field": ""
+            }
+        ],
+        "desc": "/\u6839\u636e\u62a4\u58eb\u540d\u5b57\u83b7\u53d6\u62a4\u58ebparamnamereturn/"
+    },
+    "getNurseChangeableDepartmentList": {
+        "name": "getNurseChangeableDepartmentList",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}/changeable-departments",
+        "response_obj": "message DepartmentListDTO { \n    optional Result result = 1;\n    repeated Department department = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u83b7\u53d6\u62a4\u58eb\u53ef\u5207\u6362\u7684\u79d1\u5ba4\u5217\u8868paramnurseIdreturn/"
+    },
+    "changeNurseDepartment": {
+        "name": "changeNurseDepartment",
+        "requestUrl": "/api/yolar/v3/nurses/change-department",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.ChangeDepartmentOption",
+                "field": "message ChangeDepartmentOption { \n    optional int64 nurseId = 1;\n    optional int64 fromDepartmentId = 2;\n    optional int64 toDepartmentId = 3;\n}"
+            }
+        ],
+        "desc": "/\u66f4\u6362\u62a4\u58eb\u79d1\u5ba41.\u5e76\u4e0d\u4f1a\u4fee\u6539nurse.departmentId\uff0c\u800c\u662f\u627e\u5230\u76ee\u6807\u79d1\u5ba4\u4e0b\u7684\u62a4\u58eb\uff0c\u6fc0\u6d3bactive\u4e3atrue2.\u5e76\u5c06\u5176\u4f59\u8be5\u62a4\u58eb\u5728\u522b\u7684\u79d1\u5ba4\u4e0b\u7684\u8eab\u4efdactive\u53d8\u4e3afalseparamoptionreturn\u5f53\u524d\u7684active\u62a4\u58eb/"
+    },
+    "changeStatusNurseCompleteInfo": {
+        "name": "changeStatusNurseCompleteInfo",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}/change-status/nurse-complete-info",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u66f4\u6539\u62a4\u58eb\u72b6\u6001-\u62a4\u58eb\u5b8c\u5584\u4e2a\u4eba\u4fe1\u606fparamnurseIdreturn/"
+    },
+    "changeStatusAdminPermitAuthorized": {
+        "name": "changeStatusAdminPermitAuthorized",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}/change-status/admin-permit-authorized",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u66f4\u6539\u62a4\u58eb\u72b6\u6001-\u8fd0\u8425\u5141\u8bb8\u62a4\u58eb\u8ba4\u8bc1paramnurseIdreturn/"
+    },
+    "changeStatusAdminPermitMaster": {
+        "name": "changeStatusAdminPermitMaster",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}/change-status/admin-permit-master",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u66f4\u6539\u62a4\u58eb\u72b6\u6001-\u8fd0\u8425\u5141\u8bb8\u62a4\u58eb\u6210\u4e3a\u62a4\u58eb\u7ba1\u7406\u5458paramnurseIdreturn/"
+    },
+    "changeStatusAdminPermitAssistant": {
+        "name": "changeStatusAdminPermitAssistant",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}/change-status/admin-permit-assistant",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u66f4\u6539\u62a4\u58eb\u72b6\u6001-\u8fd0\u8425\u5141\u8bb8\u62a4\u58eb\u6210\u4e3a\u79d1\u5bc6paramnurseIdreturn/"
+    },
+    "changeStatusNurseFailOfAuthorization": {
+        "name": "changeStatusNurseFailOfAuthorization",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}/change-status/nurse-fail-of-authorization",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u66f4\u6539\u62a4\u58eb\u72b6\u6001-\u62a4\u58eb\u8ba4\u8bc1\u5931\u8d25paramnurseIdreturn/"
+    },
+    "changeStatusNurseUpdateInfo": {
+        "name": "changeStatusNurseUpdateInfo",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}/change-status/nurse-update-info",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u66f4\u6539\u62a4\u58eb\u72b6\u6001-\u62a4\u58eb\u91cd\u65b0\u63d0\u4ea4\u8ba4\u8bc1\u4fe1\u606fparamnurseIdreturn/"
+    },
+    "getActiveNurseListByDepartmentId": {
+        "name": "getActiveNurseListByDepartmentId",
+        "requestUrl": "/api/yolar/v3/nurses/departments/{departmentId}/active",
+        "response_obj": "message NurseListDTO { \n    optional Result result = 1;\n    repeated Nurse nurse = 2;\n}",
+        "method": "",
+        "parameters": [
+            {
+                "name": "departmentId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u83b7\u53d6\u79d1\u5ba4\u4e0b\u7684\u6d3b\u52a8\u62a4\u58ebparamdepartmentIdreturn/"
+    },
+    "setNurseActive": {
+        "name": "setNurseActive",
+        "requestUrl": "/api/yolar/v3/nurses/{nurseId}/set-active",
+        "response_obj": "message NurseDTO { \n    optional Result result = 1;\n    optional Nurse nurse = 2;\n}",
+        "method": "",
+        "parameters": [
+            {
+                "name": "nurseId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u5c06\u62a4\u58eb\u7f6e\u4e3a\u6d3b\u52a8paramnurseIdreturn/"
+    },
+    "resetPassword": {
+        "name": "resetPassword",
+        "requestUrl": "/api/yolar/v3/password",
+        "response_obj": "message PasswordDTO { \n    optional int64 passwordId = 1;\n    optional string phone = 2;\n    optional string email = 3;\n    optional string password = 4;\n    optional int64 createdAt = 5;\n    optional int64 updatedAt = 6;\n    optional Result result = 7;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.PasswordOption",
+                "field": "message PasswordOption { \n    optional string phone = 1;\n    optional string email = 2;\n    optional string password = 3;\n    optional Role role = 4;\n\n    enum Role {\n        NURSE = 1;\n        USER = 2;\n        ADMIN = 3;\n    }\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "updatePasswordRelation": {
+        "name": "updatePasswordRelation",
+        "requestUrl": "/api/yolar/v3/password",
+        "response_obj": "message PasswordDTO { \n    optional int64 passwordId = 1;\n    optional string phone = 2;\n    optional string email = 3;\n    optional string password = 4;\n    optional int64 createdAt = 5;\n    optional int64 updatedAt = 6;\n    optional Result result = 7;\n}",
+        "method": "PUT",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.PasswordRelationOption",
+                "field": "message PasswordRelationOption { \n    optional string phone = 1;\n    optional string email = 2;\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "validatePassword": {
+        "name": "validatePassword",
+        "requestUrl": "/api/yolar/v3/password/validate",
+        "response_obj": "message ValidatePasswordDTO { \n    optional Result result = 1;\n    optional bool validate = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.PasswordOption",
+                "field": "message PasswordOption { \n    optional string phone = 1;\n    optional string email = 2;\n    optional string password = 3;\n    optional Role role = 4;\n\n    enum Role {\n        NURSE = 1;\n        USER = 2;\n        ADMIN = 3;\n    }\n}"
+            }
+        ],
+        "desc": ""
+    },
+    "checkExistByShadowId": {
+        "name": "checkExistByShadowId",
+        "requestUrl": "/api/yolar/v3/shadow-wx/exist",
+        "response_obj": "message RedirectResponseDTO { \n    optional Result result = 1;\n    optional string redirectUrl = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.ShadowWxAccountOption",
+                "field": "message ShadowWxAccountOption { \n    optional string shadowWxId = 1;\n    optional string departmentId = 2;\n}"
+            },
+            {
+                "name": "userId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/tocheckuser\"sexistinShadowWxbyuserIdandshadowWxIdreturn/"
+    },
+    "redirectToDestinationUrl": {
+        "name": "redirectToDestinationUrl",
+        "requestUrl": "/api/yolar/v3/shadow-wx",
+        "response_obj": "message RedirectResponseDTO { \n    optional Result result = 1;\n    optional string redirectUrl = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "wxProfile",
+                "type": "Yolar.ShadowWxAuthOption",
+                "field": "message ShadowWxAuthOption { \n    optional string code = 1;\n    optional string state = 2;\n}"
+            },
+            {
+                "name": "userId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/tosaveuser\"sopenIdwhofromShadowWxAccountandredirectreturn/"
+    },
+    "findShadowWxAccountByDepartmentId": {
+        "name": "findShadowWxAccountByDepartmentId",
+        "requestUrl": "/api/yolar/v3/shadow/{departmentId}",
+        "response_obj": "message ShadowWxAccountDTO { \n    optional int64 shadowWxAccountId = 1;\n    optional string destination_url = 2;\n    optional string appid = 3;\n    optional string secret = 4;\n    optional string note = 5;\n    optional int64 createdAt = 6;\n    optional int64 updatedAt = 7;\n    optional Result result = 8;\n    repeated int64 departmentId = 9;\n    optional WxTemplateInfo info = 10;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "departmentId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": ""
+    },
+    "findByShadowWxAccountIdAndUserId": {
+        "name": "findByShadowWxAccountIdAndUserId",
+        "requestUrl": "/api/yolar/v3/shadow/{shadowWxId}/user/{userId}",
+        "response_obj": "message ShadowWxProfileDTO { \n    optional int64 shadowWxProfileId = 1;\n    optional int64 userId = 2;\n    optional string openId = 3;\n    optional int64 shadowWxAccountId = 4;\n    optional bool isSubscribed = 5;\n    optional int64 createdAt = 6;\n    optional int64 updatedAt = 7;\n    optional Result result = 8;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "shadowWxId",
+                "type": "Long",
+                "field": ""
+            },
+            {
+                "name": "userId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": ""
+    },
+    "createUser": {
+        "name": "createUser",
+        "requestUrl": "/api/yolar/v3/users",
+        "response_obj": "message UserDTO { \n    optional Result result = 1;\n    optional User user = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.UserCreateOption",
+                "field": "message UserCreateOption { \n    optional string nickname = 1;\n    optional string avatarUrl = 2;\n    optional int64 gender = 3;\n    optional int64 birthday = 4;\n    optional string idCard = 5;\n    optional string phone = 6;\n}"
+            }
+        ],
+        "desc": "/\u521b\u5efa\u60a3\u8005paramoptionreturn/"
+    },
+    "archiveUser": {
+        "name": "archiveUser",
+        "requestUrl": "/api/yolar/v3/users/archive",
+        "response_obj": "message UserListDTO { \n    optional Result result = 1;\n\n    repeated User user = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.ArchiveUserOption",
+                "field": "message ArchiveUserOption { \n    optional int64 departmentId = 1;\n    repeated int64 user = 2;\n}"
+            }
+        ],
+        "desc": "/Archive\u60a3\u8005paramoptionreturn/"
+    },
+    "unarchiveUser": {
+        "name": "unarchiveUser",
+        "requestUrl": "/api/yolar/v3/users/unarchive",
+        "response_obj": "message UserListDTO { \n    optional Result result = 1;\n\n    repeated User user = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.UnarchiveUserOption",
+                "field": "message UnarchiveUserOption { \n    optional int64 departmentId = 1;\n    repeated int64 user = 2;\n}"
+            }
+        ],
+        "desc": "/Unarchive\u60a3\u8005paramoptionreturn/"
+    },
+    "addUserToDepartment": {
+        "name": "addUserToDepartment",
+        "requestUrl": "/api/yolar/v3/users/add-to-department",
+        "response_obj": "message SimpleResponse { \n    optional Result result = 1;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.UserAddToDepartmentOption",
+                "field": "message UserAddToDepartmentOption { \n    repeated UserDepartment userDepartment = 1;\n\n    message UserDepartment {\n        optional int64 userId = 1;\n        optional int64 departmentId = 2;\n    }\n}"
+            }
+        ],
+        "desc": "/\u60a3\u8005\u5173\u6ce8(\u52a0\u5165)\u79d1\u5ba4\uff08\u6279\u91cf\uff09paramoptionreturn/"
+    },
+    "removeUserFromDepartment": {
+        "name": "removeUserFromDepartment",
+        "requestUrl": "/api/yolar/v3/users/remove-from-department",
+        "response_obj": "message SimpleResponse { \n    optional Result result = 1;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.RemoveUserFromDepartmentOption",
+                "field": "message RemoveUserFromDepartmentOption { \n    repeated UserDepartment userDepartment = 1;\n\n    message UserDepartment {\n        optional int64 userId = 1;\n        optional int64 departmentId = 2;\n    }\n}"
+            }
+        ],
+        "desc": "/\u5220\u9664\u60a3\u8005\u548c\u79d1\u5ba4\u7684\u5173\u8054\uff08\u6279\u91cf\uff09\uff0c\u5373\u5220\u9664\u5173\u8054\u5173\u7cfbparamoptionreturn/"
+    },
+    "getUserDepartmentListByUserId": {
+        "name": "getUserDepartmentListByUserId",
+        "requestUrl": "/api/yolar/v3/users/{userId}/departments",
+        "response_obj": "message UserDepartmentListDTO { \n    optional Result result = 1;\n\n    repeated UserDepartment userDepartment = 2;\n}",
+        "method": "",
+        "parameters": [
+            {
+                "name": "userId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u67e5\u8be2\u60a3\u8005\u5173\u6ce8\u7684\u79d1\u5ba4\u5217\u8868paramuserIdreturn/"
+    },
+    "getUserListByDepartmentId": {
+        "name": "getUserListByDepartmentId",
+        "requestUrl": "/api/yolar/v3/users/departments",
+        "response_obj": "message UserListDTO { \n    optional Result result = 1;\n\n    repeated User user = 2;\n}",
+        "method": "",
+        "parameters": [
+            {
+                "name": "map",
+                "type": "Map<String, String>",
+                "field": ""
+            }
+        ],
+        "desc": "/\u67e5\u8be2\u79d1\u5ba4\u4e0b\u7684\u60a3\u8005\u5217\u8868parammap\u53c2\u8003com.youhujia.halo.yolar.YolarUserDepartmentQueryEnumreturn/"
+    },
+    "createUserByWxInfo": {
+        "name": "createUserByWxInfo",
+        "requestUrl": "/api/yolar/v3/users/wx",
+        "response_obj": "message UserDTO { \n    optional Result result = 1;\n    optional User user = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.WechatInfoOption",
+                "field": "message WechatInfoOption { \n    optional string openId = 1;\n    optional string nickname = 2;\n    optional string avatarUrl = 3;\n    optional int64 gender = 4;\n    optional string unionid = 5;\n}"
+            }
+        ],
+        "desc": "/\u901a\u8fc7\u5fae\u4fe1\u4fe1\u606f\u521b\u5efa\u60a3\u8005paramoptionreturn/"
+    },
+    "getUserById": {
+        "name": "getUserById",
+        "requestUrl": "/api/yolar/v3/users/{userId}",
+        "response_obj": "message UserDTO { \n    optional Result result = 1;\n    optional User user = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "userId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u901a\u8fc7userId\u83b7\u53d6\u60a3\u8005paramuserIdreturn/"
+    },
+    "getUserByOpenId": {
+        "name": "getUserByOpenId",
+        "requestUrl": "/api/yolar/v3/users/open-id/{openId}",
+        "response_obj": "message UserDTO { \n    optional Result result = 1;\n    optional User user = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "openId",
+                "type": "String",
+                "field": ""
+            }
+        ],
+        "desc": "/\u901a\u8fc7\u5fae\u4fe1openid\u83b7\u53d6\u60a3\u8005paramopenIdreturn/"
+    },
+    "updateUser": {
+        "name": "updateUser",
+        "requestUrl": "/api/yolar/v3/users",
+        "response_obj": "message UserDTO { \n    optional Result result = 1;\n    optional User user = 2;\n}",
+        "method": "PATCH",
+        "parameters": [
+            {
+                "name": "option",
+                "type": "Yolar.UserUpdateOption",
+                "field": "message UserUpdateOption { \n    optional int64 userId = 1;\n    optional string nickname = 2;\n    optional string realname = 3;\n    optional string avatarUrl = 4;\n    optional int64 gender = 5;\n    optional int64 birthday = 6;\n    optional string idCard = 7;\n    optional string phone = 8;\n    optional string flag = 9;\n}"
+            }
+        ],
+        "desc": "/\u66f4\u65b0\u60a3\u8005\u4fe1\u606fparamoptionreturn/"
+    },
+    "getUserByPhone": {
+        "name": "getUserByPhone",
+        "requestUrl": "/api/yolar/v3/users/phone/{phone}",
+        "response_obj": "message UserDTO { \n    optional Result result = 1;\n    optional User user = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "phone",
+                "type": "String",
+                "field": ""
+            }
+        ],
+        "desc": "/\u901a\u8fc7phone\u67e5\u627e\u60a3\u8005paramphonereturn/"
+    },
+    "getUsersByNickname": {
+        "name": "getUsersByNickname",
+        "requestUrl": "/api/yolar/v3/users/nickname/{nickname}",
+        "response_obj": "message UserListDTO { \n    optional Result result = 1;\n\n    repeated User user = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "name",
+                "type": "String",
+                "field": ""
+            }
+        ],
+        "desc": "/\u901a\u8fc7nickname\u67e5\u627e\u60a3\u8005paramnamereturn/"
+    },
+    "migrateUserFromDeprecatedWxAccount": {
+        "name": "migrateUserFromDeprecatedWxAccount",
+        "requestUrl": "/api/yolar/v3/users/{currentUserId}/migrate-from-deprecated-wx-account/{oldOpenId}",
+        "response_obj": "message MigResponse { \n    optional Result result = 1;\n    optional string token = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "currentUserId",
+                "type": "Long",
+                "field": ""
+            },
+            {
+                "name": "oldOpenId",
+                "type": "String",
+                "field": ""
+            }
+        ],
+        "desc": "/\u8fc1\u79fb\u516c\u4f17\u53f7\u60a3\u8005paramcurrentUserIdparamoldOpenIdreturn/"
+    },
+    "mergeUser": {
+        "name": "mergeUser",
+        "requestUrl": "/api/yolar/v3/users/merge-user/{fromUserId}/to/{toUserId}",
+        "response_obj": "message UserDTO { \n    optional Result result = 1;\n    optional User user = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "fromUserId",
+                "type": "Long",
+                "field": ""
+            },
+            {
+                "name": "toUserId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u7528\u6237\u6ce8\u518cphone\u4e4b\u540e\uff0c\u53ef\u80fd\u53d1\u73b0\u5df2\u5b58\u5728\u5bf9\u5e94User\u8bb0\u5f55\uff0c\u9700\u8981\u5bf9\u5e94\u505amerge\u5904\u7406<p>\u73b0\u5728\u53ea\u5904\u7406\u4e86\u5bf9\u5e94\u7684openid\u4e0d\u4e00\u81f4\u7684\u60c5\u51b5\uff0c\u7528\u4e8e\u5904\u7406\u7528\u6237\u66f4\u6362\u4e86\uff0cparamfromUserIdparamtoUserIdreturn/"
+    },
+    "getUserListByIds": {
+        "name": "getUserListByIds",
+        "requestUrl": "/api/yolar/v3/users/batch/{ids}",
+        "response_obj": "message UserListDTO { \n    optional Result result = 1;\n\n    repeated User user = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "userIds",
+                "type": "String",
+                "field": ""
+            }
+        ],
+        "desc": "/batch\u63a5\u53e3paramuserIdsreturn/"
+    },
+    "createUserAddress": {
+        "name": "createUserAddress",
+        "requestUrl": "/api/yolar/v3/user-addresses",
+        "response_obj": "message UserAddressDTO { \n    optional Result result = 1;\n    optional UserAddress userAddress = 2;\n}",
+        "method": "POST",
+        "parameters": [
+            {
+                "name": "userAddressCreateOption",
+                "type": "Yolar.UserAddressCreateOption",
+                "field": "message UserAddressCreateOption { \n    optional string name = 1;\n    optional int64 gender = 2;\n    optional int64 birthday = 3;\n    optional string idCard = 4;\n    optional int64 relation = 5;\n    optional Address address = 6;\n    optional string phone = 7;\n    optional bool default = 8;\n    optional int64 userId = 9;\n}"
+            }
+        ],
+        "desc": "/createUserAddress/"
+    },
+    "getUserAddress": {
+        "name": "getUserAddress",
+        "requestUrl": "/api/yolar/v3/user-addresses/{userAddressId}",
+        "response_obj": "message UserAddressDTO { \n    optional Result result = 1;\n    optional UserAddress userAddress = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "userAddressId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/getUserAddress/"
+    },
+    "updateUserAddress": {
+        "name": "updateUserAddress",
+        "requestUrl": "/api/yolar/v3/user-addresses/{userAddressId}",
+        "response_obj": "message UserAddressDTO { \n    optional Result result = 1;\n    optional UserAddress userAddress = 2;\n}",
+        "method": "PATCH",
+        "parameters": [
+            {
+                "name": "userAddressId",
+                "type": "Long",
+                "field": ""
+            },
+            {
+                "name": "userAddressUpdateOption",
+                "type": "Yolar.UserAddressUpdateOption",
+                "field": "message UserAddressUpdateOption { \n    optional int64 userAddressId = 1;\n    optional string name = 2;\n    optional int64 gender = 3;\n    optional int64 birthday = 4;\n    optional string idCard = 5;\n    optional int64 relation = 6;\n    optional Address address = 7;\n    optional string phone = 8;\n    optional bool default = 9;\n    optional int64 userId = 10;\n}"
+            }
+        ],
+        "desc": "/updateUserAddress/"
+    },
+    "deleteUserAddress": {
+        "name": "deleteUserAddress",
+        "requestUrl": "/api/yolar/v3/user-addresses/{userAddressId}",
+        "response_obj": "message SimpleResponse { \n    optional Result result = 1;\n}",
+        "method": "DELETE",
+        "parameters": [
+            {
+                "name": "userAddressId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/deleteUserAddress/"
+    },
+    "setUserAddressDefault": {
+        "name": "setUserAddressDefault",
+        "requestUrl": "/api/yolar/v3/user-addresses/{userAddressId}/set-default",
+        "response_obj": "message SimpleResponse { \n    optional Result result = 1;\n}",
+        "method": "PATCH",
+        "parameters": [
+            {
+                "name": "userAddressId",
+                "type": "Long",
+                "field": ""
+            },
+            {
+                "name": "userAddressUpdateOption",
+                "type": "Yolar.UserAddressUpdateOption",
+                "field": "message UserAddressUpdateOption { \n    optional int64 userAddressId = 1;\n    optional string name = 2;\n    optional int64 gender = 3;\n    optional int64 birthday = 4;\n    optional string idCard = 5;\n    optional int64 relation = 6;\n    optional Address address = 7;\n    optional string phone = 8;\n    optional bool default = 9;\n    optional int64 userId = 10;\n}"
+            }
+        ],
+        "desc": "/\u6839\u636euserAddress\u8bbe\u7f6edefault\u7684\u9ed8\u8ba4\u503c/"
+    },
+    "getUserAddressListByUserId": {
+        "name": "getUserAddressListByUserId",
+        "requestUrl": "/api/yolar/v3/user-addresses/users/{userId}",
+        "response_obj": "message UserAddressListDTO { \n    optional Result result = 1;\n    repeated UserAddress userAddress = 2;\n}",
+        "method": "GET",
+        "parameters": [
+            {
+                "name": "userId",
+                "type": "Long",
+                "field": ""
+            }
+        ],
+        "desc": "/\u83b7\u53d6\u60a3\u8005\u6240\u6709\u5730\u5740paramuserIdreturn/"
+    }
+}
