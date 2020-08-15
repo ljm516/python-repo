@@ -33,15 +33,15 @@ for person in Person.select():
     print(person.name, person.birthday, person.is_relative)
 
 for pet in Pet.select().where(Pet.animal_type == 'cat'):
-    print pet.name, pet.owner.name
+    print(pet.name, pet.owner.name)
 print('==============================')
 for pet in Pet.select(Pet, Person).join(Person).where(Pet.animal_type == 'cat').order_by(Pet.name):
-    print pet.name, pet.owner.name
+    print(pet.name, pet.owner.name)
 
 print('==============================')
 
 for pet in Pet.select().join(Person).where(Person.name == 'Bob'):
-    print pet.name
+    print(pet.name)
 
 for person in Person.select().order_by(Person.birthday.desc()):
-    print person.name, person.birthday
+    print(person.name, person.birthday)
